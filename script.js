@@ -9,7 +9,7 @@ function createGridSquares() {
     for(let j = 0; j < 16; j++) {
       gridSquare = document.createElement(`div`);
       gridSquare.classList.add(`gridSquare`);
-      gridSquare.setAttribute(`style`, `width: ${100/16}%; height: ${100/16}%`);
+      gridSquare.setAttribute(`style`, `width: ${100/16}%`);
       container.appendChild(gridSquare);
     }
   }
