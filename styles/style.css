@@ -8,27 +8,62 @@ body {
 
 .container {
   display: flex;
-  /* justify-content: space-between; */
   flex-wrap: wrap;
-  /* flex-wrap: nowrap; */
-  height: 450px;
-  width: 450px;
-  /* I need the gridSquares not to get out of the container */
-  /* overflow: hidden;  */
   border: 2px solid black;
   
 }
 
+
 .gridSquare {
-  /* width: calc(450px / 8 - 2px); */
-  /* height: calc(450px / 8 - 2px); */
-  /* flex: 1 0 12%; */
-  /* I need the gridSquares to grow if they don't fill the container */
-  /* flex-grow: 1; */
-  /* flex: auto; */
-  /* flex-shrink: 1; */
-  border: 1px solid black;
   background-color: goldenrod;
+  /* Add a border without affecting the size of .gridSquare */
+  outline: 1px solid black;
+}
+
+/* If on Laptop or Desktop, show the text within the p element that has the class .desktop in it */
+@media (pointer: fine) {
+  .touch {
+    display: none;
+  }
+  .desktop {
+    display: flex;
+  }
+}
+
+/* If on touchscreen, show the text within the p element that has the class .touch in it */
+@media (pointer: coarse) {
+  .desktop {
+    display: none;
+  }
+  .touch {
+    display: flex;
+  }
+}
+
+/* Layouts for different screen sizes */
+
+/* smartphones, iPhone, portrait 480x320 phones, portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (min-width:320px)  { 
+  .container {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* portrait tablets, portrait iPads, landscape e-readers, landscape 800x480 or 854x480 phones, tablets, landscape iPads, lo-res laptops and lo-res desktops */
+@media (min-width:961px)  { 
+  .container {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+/* big landscape tablets, laptops and desktops, hi-res laptops, hi - res desktops */ 
+@media (min-width:1281px) { 
+  .container {
+    width: 500px;
+    height: 500px;
+  }
 }
 
 
