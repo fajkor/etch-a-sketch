@@ -15,7 +15,7 @@ body {
 
 
 .gridSquare {
-  background-color: goldenrod;
+  background-color: #fff;
   /* Add a border without affecting the size of .gridSquare */
   outline: 1px solid black;
 }
