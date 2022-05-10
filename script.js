@@ -5,6 +5,7 @@ let gridSize = 16;
 /* When the mouse pointer enters the container area, createGridSquares and addClearGridButton run only once */
 container.addEventListener(`mouseenter`, createGridSquares, {once: true});
 container.addEventListener(`mouseenter`, addClearGridButton, {once: true});
+container.addEventListener(`mouseenter`, addNewGridButton, {once: true});
 
 
 /* Clear container, create grid squares and append them to container */
@@ -43,7 +44,21 @@ function addClearGridButton() {
   body.insertBefore(clearGrid, container);
 
   clearGrid.addEventListener(`click`, () => {
-    gridSize = Number(prompt(`Please, enter grid size`, `1 - 100`));
+    gridSize = 16;
+    createGridSquares();
+  });
+}
+
+/* Create New Grid button, append it, add event listener to it. */
+function addNewGridButton() {
+  let newGrid = document.createElement(`button`);
+  newGrid.classList.add(`newGrid`);
+  newGrid.setAttribute(`type`, `button`);
+  newGrid.textContent = `New Grid`;
+  body.insertBefore(newGrid, container);
+
+  newGrid.addEventListener(`click`, () => {
+    gridSize = Number(prompt(`New Grid`, `1 - 100`));
     if ((gridSize <= 0) || (gridSize > 100) || Number.isNaN(gridSize)) {
       alert(`Invalid Input! Try again!`);
     } else if (gridSize > 0 || gridSize <= 100) {
