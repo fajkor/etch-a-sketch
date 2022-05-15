@@ -21,26 +21,6 @@ body {
   outline: 1px solid black;
 }
 
-/* If on Laptop or Desktop, show the text within the p element that has the class .desktop in it */
-@media (pointer: fine) {
-  .touch {
-    display: none;
-  }
-  .desktop {
-    display: flex;
-  }
-}
-
-/* If on touchscreen, show the text within the p element that has the class .touch in it */
-@media (pointer: coarse) {
-  .desktop {
-    display: none;
-  }
-  .touch {
-    display: flex;
-  }
-}
-
 /* Layouts for different screen sizes */
 
 /* smartphones, iPhone, portrait 480x320 phones, portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
