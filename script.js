@@ -4,8 +4,8 @@ const inputContainer = document.createElement(`div`);
 const buttonsContainer = document.createElement(`div`);
 const label = document.createElement(`label`);
 const input = document.createElement(`input`);
-let rgbColors = document.createElement(`button`);
-let blackColor = document.createElement(`button`);
+const rgbColors = document.createElement(`button`);
+const blackColor = document.createElement(`button`);
 let gridSize = 16;
 
 /* When the mouse pointer enters the container area, create grid squares, append input field, add New Grid button */
@@ -64,7 +64,6 @@ function addNumberInput() {
   input.addEventListener(`keypress`, (e) => {
     if(e.key === `Enter`) {
     gridSize = document.querySelector(`#newGrid`).value;
-    console.log(gridSize);
       if ((gridSize <= 0) || (gridSize > 100) || Number.isNaN(gridSize)) {
         alert(`Invalid Input! Enter a number between 1 and 100!`);
       } else if (gridSize > 0 || gridSize <= 100) {
@@ -97,7 +96,7 @@ function addNumberInput() {
         }
       }
           
-        }
+    }
     });
   }
 
@@ -217,10 +216,3 @@ function toggleGridColor() {
 function generateRGBValue() {
   return Math.floor(Math.random() * 256);
 }
-
-
-
-
-
-
-
