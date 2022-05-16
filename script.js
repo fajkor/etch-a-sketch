@@ -13,16 +13,18 @@ container.addEventListener(`mouseenter`, createGridSquares, {once: true});
 container.addEventListener(`mouseenter`, addInputContainer, {once: true});
 container.addEventListener(`mouseenter`, addNumberInput, {once: true});
 container.addEventListener(`mouseenter`, addNewGridButton, {once: true});
+/* Add a container for 'Clear Grid' button and 'Change To RGB' button */
 container.addEventListener(`mouseenter`, addButtonsContainer, {once: true});
+/* Append 'Clear Grid' button */
 container.addEventListener(`mouseenter`, addClearGridButton, {once: true});
+/* Append 'Change To RGB' button */
 container.addEventListener(`mouseenter`, toggleGridColor, {once: true});
 
 
 /* Clear container, create grid squares and append them to container */
 function createGridSquares() {
   let gridSquareArray = [];
-
-  container.textContent = ``;
+  container.textContent = ``; /* Clear container */
   let gridSquare = ``;
   
   /* create 16x16 squares, push them to an array, give them size and append them to container */
@@ -40,15 +42,17 @@ function createGridSquares() {
   for (let i = 0; i < (gridSize * gridSize); i++) {
     gridSquareArray[i].addEventListener(`mouseover`, () => {
       gridSquareArray[i].style.backgroundColor = `black`;
-    }, {once: true});
+    });
   }
 }
 
+/* Append a container for the input field and a button */
 function addInputContainer() {
   inputContainer.classList.add(`inputContainer`);
   body.insertBefore(inputContainer, container);
 }
 
+/* Append an input field and its button. Add an event listener to input field. */
 function addNumberInput() {
   label.setAttribute(`for`, `newGrid`);
   label.textContent = `Enter a number (1-100)`;
@@ -61,17 +65,21 @@ function addNumberInput() {
   input.setAttribute(`max`, `100`);
   inputContainer.appendChild(input);
 
+
   input.addEventListener(`keypress`, (e) => {
     if(e.key === `Enter`) {
-    gridSize = document.querySelector(`#newGrid`).value;
+      /* Get the number that the user entered in the input field and store it into gridSize */
+      gridSize = document.querySelector(`#newGrid`).value;
       if ((gridSize <= 0) || (gridSize > 100) || Number.isNaN(gridSize)) {
         alert(`Invalid Input! Enter a number between 1 and 100!`);
       } else if (gridSize > 0 || gridSize <= 100) {
+        /* If 'Change To RGB' exists in the HTML */
         if(document.querySelector(`.rgbColors`)) {
           createGridSquares();
+
+          /* If 'Change To Black' button exists in the HTML */
         } else if (document.querySelector(`.blackColor`)) {
           let gridSquareArray = [];
-
           container.textContent = ``;
           let gridSquare = ``;
   
@@ -110,17 +118,17 @@ function addNewGridButton() {
 
 
   newGrid.addEventListener(`click`, () => {
+    /* Get the number that the user entered in the input field and store it into gridSize */
     gridSize = document.querySelector(`#newGrid`).value;
-    console.log(gridSize);
     if ((gridSize <= 0) || (gridSize > 100) || Number.isNaN(gridSize)) {
       alert(`Invalid Input! Enter a number between 1 and 100!`);
     } else if (gridSize > 0 || gridSize <= 100) {
-      // createGridSquares();
+      /* If 'Change To RGB' exists in the HTML */
       if(document.querySelector(`.rgbColors`)) {
         createGridSquares();
+        /* If 'Change To Black' button exists in the HTML */
       } else if (document.querySelector(`.blackColor`)) {
         let gridSquareArray = [];
-
         container.textContent = ``;
         let gridSquare = ``;
 
@@ -161,15 +169,21 @@ function addClearGridButton() {
   buttonsContainer.appendChild(clearGrid);
 
   clearGrid.addEventListener(`click`, () => {
+    /* Select all the elements with the class .gridSquare and store them into gridSquareNodeList. */
     let gridSquareNodeList = document.querySelectorAll(`.gridSquare`);
     for (let i = 0; i < gridSquareNodeList.length; i++) {
+      /* Give each element with the class gridSquare the color white. */
       gridSquareNodeList[i].setAttribute(`style`, `width: ${100/gridSize}%; background-color:#fff`);
+      /* Give each element with the class gridSquare an event listener. When this event is triggered, a random RGB color will be added to the gridSquare. */
       gridSquareNodeList[i].addEventListener(`mouseover`, () => {
         gridSquareNodeList[i].setAttribute(`style`, `width: ${100/gridSize}%; background-color: rgb(${generateRGBValue()}, ${generateRGBValue()}, ${generateRGBValue()})`);
         });
     }
+
+     /* If 'Change To RGB' button exists */
      if (document.querySelector(`.rgbColors`)) {
       for (let i = 0; i < gridSquareNodeList.length; i++) {
+        /* Give each element with the class gridSquare an event listener. When this event is triggered, black color will be added to the gridSquare. */
         gridSquareNodeList[i].addEventListener(`mouseover`, () => {
         gridSquareNodeList[i].setAttribute(`style`, `width: ${100/gridSize}%; background-color: black`);
         });
@@ -178,6 +192,7 @@ function addClearGridButton() {
   });
 }
 
+/* Insert 'Change To RGB' button and add an event listener to it. Also, insert 'Change To Black' button and add event listener to it */
 function toggleGridColor() {
   rgbColors.classList.add(`rgbColors`);
   rgbColors.setAttribute(`type`, `button`);
@@ -187,15 +202,18 @@ function toggleGridColor() {
   blackColor.classList.add(`blackColor`);
   blackColor.setAttribute(`type`, `button`);
   blackColor.textContent = `Change To Black`;
-
+  
   rgbColors.addEventListener(`click`, () => {
     let gridSquareNodeList = document.querySelectorAll(`.gridSquare`);
 
     for (let i = 0; i < gridSquareNodeList.length; i++) {
       gridSquareNodeList[i].addEventListener(`mouseover`, () => {
+        /* On mouseover, give the square grid for whom the mouseover event is triggered, a random RGB background color. */
         gridSquareNodeList[i].setAttribute(`style`, `width: ${100/gridSize}%; background-color: rgb(${generateRGBValue()}, ${generateRGBValue()}, ${generateRGBValue()})`);
       });
     }
+
+    /* Remove 'Change To RGB' button and add 'Change To Black' button. */
     buttonsContainer.removeChild(rgbColors);
     buttonsContainer.appendChild(blackColor);
   });
@@ -204,10 +222,13 @@ function toggleGridColor() {
     let gridSquareNodeList = document.querySelectorAll(`.gridSquare`);
 
     for (let i = 0; i < gridSquareNodeList.length; i++) {
+      /* On mouseover, give the square grid for whom the mouseover event is triggered, the color black. */
       gridSquareNodeList[i].addEventListener(`mouseover`, () => {
       gridSquareNodeList[i].setAttribute(`style`, `width: ${100/gridSize}%; background-color: black`);
       });
     } 
+
+    /* Remove 'Change To Black' button and add 'Change to RGB' button. */
     buttonsContainer.removeChild(blackColor);
     buttonsContainer.appendChild(rgbColors);
   });
